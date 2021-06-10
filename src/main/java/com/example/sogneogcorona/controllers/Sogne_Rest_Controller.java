@@ -24,7 +24,7 @@ public class Sogne_Rest_Controller {
 
     @GetMapping("/sogne")
     public ResponseEntity<List<Sogne>> findAll(){
-        //findAll recipes and return
+        //findAll Sogne and return
         List<Sogne> sogneList =new ArrayList<>();
         for (Sogne sogne:sogneRepo.findAll()){
             sogneList.add(sogne);
@@ -45,7 +45,7 @@ public class Sogne_Rest_Controller {
         }
     }
 
-    @PutMapping("/car/{id}")
+    @PutMapping("/sogne/{id}")
     public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody Sogne sogne) {
         Optional<Sogne> optionalSogne = sogneRepo.findById(id);
         if (!optionalSogne.isPresent()) {
@@ -56,4 +56,24 @@ public class Sogne_Rest_Controller {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{ 'msg' : 'updated' }");
 
     }
+    // HTTP Post, ie. create
+    @CrossOrigin(origins = "*", exposedHeaders = "Location")
+    @PostMapping(value = "/sogne", consumes = "application/json")
+    public ResponseEntity<Sogne> create(@RequestBody Sogne sogne) {
+        Sogne newSogne = sogneRepo.save(sogne);
+        //insert location in response header
+        return ResponseEntity.ok(newSogne);
+    }
+    //HTTP DELETE
+    @DeleteMapping("/sogne/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") int id) {
+        Optional<Sogne> optionalSogne = sogneRepo.findById(id);
+        if (!optionalSogne.isPresent()) {
+            //id findes ikke
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{'msg' : 'sogne " + id + " not found'}");
+        }
+        sogneRepo.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{ 'msg' : 'deleted' }");
+    }
+
 }

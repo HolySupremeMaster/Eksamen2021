@@ -16,11 +16,11 @@ public class SogneService {
     SogneRepo sogneRepo;
 
     public Set<Sogne> findAll(){
-        Set<Sogne> sogneSet = new HashSet<>();
+        Set<Sogne> sognes = new HashSet<>();
         for (Sogne sogne : sogneRepo.findAll()){
-            sogneSet.add(sogne);
+            sognes.add(sogne);
         }
-        return sogneSet;
+        return sognes;
     }
 
     public Sogne findById(int id){

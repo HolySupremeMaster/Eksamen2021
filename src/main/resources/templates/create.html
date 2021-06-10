@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<div lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8">
+        <title>$Title$</title>
+    </head>
+
+    <form method="post" action="/create" th:object="${sogne}">
+        <label for="sognekode">sognekode:</label>
+        <input type="number" id="sognekode" name="sognekode"><br><br>
+        <label for="navn">navn:</label>
+        <input type="text" id="navn" name="navn"><br><br>
+        <label for="kommune">kommune:</label>
+        <input type="number" id="kommune" name="kommune"><br><br>
+        <label for="smittetryk">smittetryk:</label>
+        <input type="number" id="smittetryk" name="smittetryk"><br><br>
+        <label for="nedlukningStart">nedlukningStart:</label>
+        <input type="date" id="nedlukningStart" name="nedlukningStart"><br><br>
+        <input type="submit" value="Submit">
+
+
+    </form>
+</div>
+</html>

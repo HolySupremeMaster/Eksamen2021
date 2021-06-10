@@ -1,9 +1,8 @@
 package com.example.sogneogcorona.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,15 +11,32 @@ public class Sogne {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private int sogneKode;
     private String navn;
-    private String kommune;
-    private double smittetype;
-    private Date nedlykningStart;
+    @OneToOne
+    @JoinColumn(name = "kommune_id", nullable = false)
+    private Kommune kommune;
+    private double smittetryk;
+    private Date nedlukningStart;
 
 
     public Sogne() {
+    }
+
+    public Sogne(int sogneKode, String navn, Kommune kommune, double smittetryk, Date nedlukningStart) {
+        this.sogneKode = sogneKode;
+        this.navn = navn;
+        this.kommune = kommune;
+        this.smittetryk = smittetryk;
+        this.nedlukningStart = nedlukningStart;
+    }
+    public Sogne(int id, int sogneKode, String navn, double smittetryk, Date nedlukningStart, Kommune kommune) {
+        this.id = id;
+        this.sogneKode = sogneKode;
+        this.navn = navn;
+        this.smittetryk = smittetryk;
+        this.nedlukningStart = nedlukningStart;
+        this.kommune = kommune;
     }
 
     public int getId() {
@@ -31,6 +47,14 @@ public class Sogne {
         this.id = id;
     }
 
+    public int getSogneKode() {
+        return sogneKode;
+    }
+
+    public void setSogneKode(int sogneKode) {
+        this.sogneKode = sogneKode;
+    }
+
     public String getNavn() {
         return navn;
     }
@@ -39,28 +63,28 @@ public class Sogne {
         this.navn = navn;
     }
 
-    public String getKommune() {
+    public Kommune getKommune() {
         return kommune;
     }
 
-    public void setKommune(String kommune) {
+    public void setKommune(Kommune kommune) {
         this.kommune = kommune;
     }
 
-    public double getSmittetype() {
-        return smittetype;
+    public double getSmittetryk() {
+        return smittetryk;
     }
 
-    public void setSmittetype(double smittetype) {
-        this.smittetype = smittetype;
+    public void setSmittetryk(double smittetryk) {
+        this.smittetryk = smittetryk;
     }
 
-    public Date getNedlykningStart() {
-        return nedlykningStart;
+    public Date getNedlukningStart() {
+        return nedlukningStart;
     }
 
-    public void setNedlykningStart(Date nedlykningStart) {
-        this.nedlykningStart = nedlykningStart;
+    public void setNedlukningStart(Date nedlukningStart) {
+        this.nedlukningStart = nedlukningStart;
     }
 
     @Override
@@ -69,9 +93,9 @@ public class Sogne {
                 "id=" + id +
                 ", sogneKode=" + sogneKode +
                 ", navn='" + navn + '\'' +
-                ", kommune='" + kommune + '\'' +
-                ", smittetype=" + smittetype +
-                ", nedlykningStart=" + nedlykningStart +
+                ", kommune=" + kommune +
+                ", smittetryk=" + smittetryk +
+                ", nedlukningStart=" + nedlukningStart +
                 '}';
     }
 }

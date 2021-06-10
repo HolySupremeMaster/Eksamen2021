@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link th:href="@{style.css}" rel="stylesheet"/>
+
+
+
+  <!-- Boostrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <!-- font Awesome -->
+  <script src="https://kit.fontawesome.com/23412c6a8d.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link th:href="@{table.css}" rel="stylesheet"/>
+
+  <title>Sogne Liste</title>
+
+</head>
+<body>
+
+<h1>SogneListe</h1>
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+<table>
+  <tr><th>Sognkode</th>
+    <th>Navn</th>
+    <th>Kommune </th>
+    <th>Smittetryk</th>
+    <th>Nedlukningstartdato</th>
+  </tr>
+  <tr th:each="sogne :${sognes}">
+    <td th:text="${sogne.sogneKode}"></td>
+    <td th:text="${sogne.navn}"></td>
+    <td th:text="${sogne.kommune}"></td>
+    <td th:text="${sogne.smittetryk}"></td>
+    <td th:text="${sogne.nedlukningStart}"></td>
+
+</table>
+<form name="opret" action="/create" method=get>
+  <button class="button" type="submit" >opret</button>
+</form>
+<form name="slet" action="/delete" method=get>
+  <button class="button" type="submit" >delete</button>
+</form>
+<form name="opdater" action="/update" method=get>
+  <button class="button" type="submit" >opdater</button>
+</form>
+</fieldset>
+</div>
+
+</div>
+</body>
+</html>
